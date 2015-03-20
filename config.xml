@@ -16,9 +16,24 @@
   <preference name="AutoHideSplashScreen" value="false"/>
   <preference name="target-device" value="tablet"/>
   <preference name="Orientation" value="landscape"/>
+
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+
+  <!-- No idea if this is needed or not  -->
+  <feature name="Printer">
+    <param name="ios-package" value="APPPrinter" />
+  </feature>
+
+  <!-- No idea if this is needed or not  -->
+  <feature name="Device">
+    <param name="ios-package" value="CDVDevice" />
+  </feature>
+
+  <!-- FROM: https://github.com/katzer/cordova-plugin-printer -->
+  <gap:plugin name="de.appplant.cordova.plugin.printer" version="0.6.0" />
+
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>

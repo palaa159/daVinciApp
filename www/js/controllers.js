@@ -199,21 +199,22 @@ angular.module('app.controllers', [])
 
                 };
                 $scope.shareViaPrint = function() {
-                    $cordovaPrinter.isAvailable(
-                        function(isAvailable) {
-                            if (isAvailable) {
-                                // Let's print
-                                var page = '<center>' + $rootScope.imgToShare + '</center>';
-
-                                $cordovaPrinter.print(page, 'Document.html', function() {
-                                    $scope.closeThisDialog();
-                                    $state.go('/05-thankyou');
-                                });
-                            } else {
-                                Dialogs.alert('Printing service currently unavailable. Please try another option.', 'Got it');
-                            }
-                        }
-                    );
+                  console.log("hit shareViaPrint");
+                    // $cordovaPrinter.isAvailable(
+                    //     function(isAvailable) {
+                    //         if (isAvailable) {
+                    //             // Let's print
+                    //             var page = '<center>' + $rootScope.imgToShare + '</center>';
+                    //
+                    //             $cordovaPrinter.print(page, 'Document.html', function() {
+                    //                 $scope.closeThisDialog();
+                    //                 $state.go('/05-thankyou');
+                    //             });
+                    //         } else {
+                    //             Dialogs.alert('Printing service currently unavailable. Please try another option.', 'Got it');
+                    //         }
+                    //     }
+                    // );
                 };
             }
         });
@@ -252,7 +253,7 @@ angular.module('app.controllers', [])
                     url: 'https://graph.facebook.com/v2.2/' + user_id + '/photos?access_token=' + $rootScope.fb_token + '&url=' + $rootScope.imgToShare + '&message=' + msgToPost
                 }).
                 success(function(data) {
-                    // alert("POST SUCCESSFUL"); 
+                    // alert("POST SUCCESSFUL");
                     console.log("success on POST: " + JSON.stringify(data));
                     $rootScope.goToPage('/05-thankyou');
                 }).
