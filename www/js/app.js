@@ -5,7 +5,7 @@
  * – Splashscreen
  * – Statusbar
  * – Inappbrowser
- 
+
  */
 var APP_NAME = 'DAVINCIAPP';
 var APP_PASSWD = '@volvox@';
@@ -59,7 +59,7 @@ angular.module(APP_NAME, [
         localStorage['uuid'] = '123456';
         if (window.cordova) {
             $cordovaStatusbar.hide();
-            localStorage['uuid'] = $cordovaDevice.getUUID();
+            // localStorage['uuid'] = $cordovaDevice.getUUID();
         }
         console.log('```` App Ready');
         // SET GLOBAL

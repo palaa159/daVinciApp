@@ -24,6 +24,36 @@
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+
+
+    <script>
+    /*** AIR PRINT PLUGIN ***/
+    // FROM: https://github.com/katzer/cordova-plugin-printer
+
+    document.addEventListener('deviceready', function () {
+      console.log("printer is now available");
+    }, false);
+
+    function checkPrinterStatus(){
+      console.log("hit checkPrintAvailable");
+      cordova.plugins.printer.isAvailable(
+      function (isAvailable) {
+          alert(isAvailable ? 'Service is available' : 'Service NOT available');
+        }
+      );
+    }
+
+    function printDocument(){
+      console.log("hit printDocument");
+      var page = '<h1>Hello Document<br></h1><img src="http://images.math.cnrs.fr/IMG/png/section8-image.png">';
+      cordova.plugins.printer.print(page, 'Document.html', function () {
+        alert('printing finished or canceled')
+      });
+    }
+
+    </script>
+
+
   </head>
   <body ng-app="DAVINCIAPP" style="background: url({{backgroundBg}}) fixed;">
 

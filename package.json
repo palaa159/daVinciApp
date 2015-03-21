@@ -17,6 +17,7 @@
   "cordovaPlugins": [
     "org.apache.cordova.statusbar",
     "org.apache.cordova.splashscreen",
-    "org.apache.cordova.dialogs"
+    "org.apache.cordova.dialogs",
+    "de.appplant.cordova.plugin.printer"
   ]
 }
