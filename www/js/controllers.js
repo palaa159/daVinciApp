@@ -200,9 +200,11 @@ angular.module('app.controllers', [])
                 };
                 $scope.shareViaPrint = function() {
                     console.log('HIT PRINTER');
-                    var page = '<h1>Hello Document<br></h1><img src="http://images.math.cnrs.fr/IMG/png/section8-image.png">';
+                    var page = '<img src="' + $rootScope.imgToShare + '">';
                     cordova.plugins.printer.print(page, 'Document.html', function() {
-                        alert('printing finished or canceled');
+                        $rootScope.socialToShare = 'Print';
+                        $scope.closeThisDialog();
+                        $rootScope.goToPage('/05-thankyou');
                     });
                 };
             }
