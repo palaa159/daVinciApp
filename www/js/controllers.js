@@ -199,21 +199,11 @@ angular.module('app.controllers', [])
 
                 };
                 $scope.shareViaPrint = function() {
-                    $cordovaPrinter.isAvailable(
-                        function(isAvailable) {
-                            if (isAvailable) {
-                                // Let's print
-                                var page = '<center>' + $rootScope.imgToShare + '</center>';
-
-                                $cordovaPrinter.print(page, 'Document.html', function() {
-                                    $scope.closeThisDialog();
-                                    $state.go('/05-thankyou');
-                                });
-                            } else {
-                                Dialogs.alert('Printing service currently unavailable. Please try another option.', 'Got it');
-                            }
-                        }
-                    );
+                    console.log('HIT PRINTER');
+                    var page = '<h1>Hello Document<br></h1><img src="http://images.math.cnrs.fr/IMG/png/section8-image.png">';
+                    cordova.plugins.printer.print(page, 'Document.html', function() {
+                        alert('printing finished or canceled');
+                    });
                 };
             }
         });
