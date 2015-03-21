@@ -230,6 +230,12 @@ angular.module('app.controllers', [])
     };
 
     $scope.postOnFb = function() {
+        $ionicLoading.show({
+            animation: 'fade-in',
+            showBackdrop: true,
+            maxWidth: 200,
+            showDelay: 0
+        });
         $http.get('https://graph.facebook.com/v2.2/me?access_token=' + $rootScope.fb_token.toString())
             .success(function(data, status, headers, config) {
                 console.log("get headers: " + JSON.stringify(headers));

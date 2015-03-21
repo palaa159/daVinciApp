@@ -76,7 +76,6 @@ angular.module(APP_NAME, [
                     console.log('Cookies cleared!');
                 });
             }
-
             // Restart
             console.log('go to welcome');
             $state.go('/01-welcome');
