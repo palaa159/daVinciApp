@@ -9,6 +9,8 @@ angular.module('app.controllers', [])
     Dialogs) {
     console.log('```` Rendering Settings');
 
+    $rootScope.isWelcomePage = false;
+
     $scope.confirmEvent = function() {
         localStorage['event_folder'] = $rootScope.settings.event_folder;
         EVENT_FOLDER = localStorage['event_folder'];
@@ -82,6 +84,7 @@ angular.module('app.controllers', [])
     $rootScope) {
     console.log('```` Rendering Welcome');
     $rootScope.backgroundPosX = 0;
+    $rootScope.isWelcomePage = true;
 })
 
 /* 02-register */
@@ -96,6 +99,8 @@ angular.module('app.controllers', [])
     console.log('```` Rendering Register');
     $rootScope.backgroundPosX = -40;
     $scope.user = {};
+
+    $rootScope.isWelcomePage = false;
 
     $scope.cancel = function() {
         $ionicViewSwitcher.nextDirection('back');
@@ -163,12 +168,21 @@ angular.module('app.controllers', [])
 
     $scope.openImageModal = function(imgurl) {
         console.log('open image modal');
-        $rootScope.imgToShare = imgurl;
+        IMG_TO_SHARE = imgurl;
+        $scope.imgToShare = IMG_TO_SHARE;
+
         ngDialog.open({
             template: 'views/imageModal.html',
-            controller: function($scope) {
+            scope: $scope,
+            controller: function($scope, $rootScope) {
                 // controller logic
+                console.log('you just selected %s', IMG_TO_SHARE);
                 $scope.shareViaFacebook = function() {
+                    if (window.cordova) {
+                        window.cookies.clear(function() {
+                            console.log('Cookies cleared!');
+                        });
+                    }
                     $cordovaOauth.facebook(FACEBOOK_APP_ID, ['email', 'publish_actions'])
                         .then(function(result) {
                             console.log('fb login results: ' + JSON.stringify(result));
@@ -186,10 +200,20 @@ angular.module('app.controllers', [])
                     console.log('Share via Email');
                     Dialogs.confirm('You want to share this photo to your registered email?', ['Cancel', 'Send Email'], function() {
                         // cancel
+                        console.log('COMFIRM EMAIL SEND');
                         $scope.closeThisDialog();
                     }, function() {
                         // send email
                         // goto thank you
+                        console.log('COMPILING TPL');
+                        // console.log(EMAIL_TPL_PHOTO);
+                        var compiled = _.template(EMAIL_TPL_PHOTO);
+                        EMAIL_PHOTO_COMPILED = compiled({
+                            'source_image': IMG_TO_SHARE
+                        });
+
+                        // console.log(EMAIL_TPL_PHOTO);
+
                         Mandrill.sharePhoto($rootScope.userToSend, $rootScope.emailToSend, function() {
                             $rootScope.socialToShare = 'Email';
                             $scope.closeThisDialog();
@@ -200,7 +224,7 @@ angular.module('app.controllers', [])
                 };
                 $scope.shareViaPrint = function() {
                     console.log('HIT PRINTER');
-                    var page = '<img src="' + $rootScope.imgToShare + '">';
+                    var page = '<img src="' + IMG_TO_SHARE + '">';
                     cordova.plugins.printer.print(page, 'Document.html', function() {
                         $rootScope.socialToShare = 'Print';
                         $scope.closeThisDialog();
@@ -220,16 +244,17 @@ angular.module('app.controllers', [])
     $ionicViewSwitcher,
     $http,
     Dialogs,
+    $ionicLoading,
     $state) {
     console.log('```` Rendering Share');
     $rootScope.backgroundPosX = -120;
-
+    $scope.imgToShare = IMG_TO_SHARE;
     $scope.back = function() {
         $ionicViewSwitcher.nextDirection('back');
         $state.go('/03-gallery');
     };
 
-    $scope.postOnFb = function() {
+    $scope.postOnFb = function(msgtoshare) {
         $ionicLoading.show({
             animation: 'fade-in',
             showBackdrop: true,
@@ -242,12 +267,21 @@ angular.module('app.controllers', [])
                 console.log("get user data: " + JSON.stringify(data));
 
                 var user_id = data.id;
-                var msgToPost = $rootScope.msgToShare;
+                // var msgToPost = $rootScope.msgToShare;
                 // var photoToPost = "http://itchmo.com/wp-content/uploads/2007/06/p48118p.jpg";
+                // console.log(msgtoshare);
 
+                var msgWebSafe = escape(msgtoshare)
+                    .replace(/\@/g, '%40')
+                    .replace(/\*/g, '%2A')
+                    .replace(/\//g, '%2F')
+                    .replace(/\+/g, '%2B');
+
+                var postURL = 'https://graph.facebook.com/v2.2/' + user_id + '/photos?access_token=' + $rootScope.fb_token + '&url=' + IMG_TO_SHARE + '&message=' + msgWebSafe;
+                console.log(postURL);
                 $http({
                     method: "POST",
-                    url: 'https://graph.facebook.com/v2.2/' + user_id + '/photos?access_token=' + $rootScope.fb_token + '&url=' + $rootScope.imgToShare + '&message=' + msgToPost
+                    url: postURL
                 }).
                 success(function(data) {
                     // alert("POST SUCCESSFUL"); 
@@ -277,6 +311,7 @@ angular.module('app.controllers', [])
     $rootScope.backgroundPosX = -160;
 
     $timeout(function() {
+        PREV_NOW = new Date().getTime();
         $rootScope.startOver();
     }, 10000);
 

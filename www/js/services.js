@@ -29,6 +29,26 @@ angular.module('app.services', [])
             });
     };
 
+    service.getEmailTplRegister = function(cb) {
+        $http.get('https://api-content.dropbox.com/1/files/auto/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/email/registration_email.html', {
+            headers: {
+                'Authorization': 'Bearer ' + DROPBOX_TOKEN
+            }
+        }).then(function(result) {
+            if (cb) cb(result.data);
+        });
+    };
+
+    service.getEmailTplPhoto = function(cb) {
+        $http.get('https://api-content.dropbox.com/1/files/auto/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/email/share_email.html', {
+            headers: {
+                'Authorization': 'Bearer ' + DROPBOX_TOKEN
+            }
+        }).then(function(result) {
+            if (cb) cb(result.data);
+        });
+    };
+
     service.getImages = function(cb) {
         $http.get('https://api.dropbox.com/1/metadata/auto/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/social_gallery', {
             headers: {
@@ -129,6 +149,7 @@ angular.module('app.services', [])
 /* Mandrillapp */
 .factory('Mandrill', function() {
     var service = {};
+
     service.sendMail = function(name, email, cb) {
         var m = new mandrill.Mandrill(MANDRILL_TOKEN);
         var params = {
@@ -138,7 +159,7 @@ angular.module('app.services', [])
                     "email": email
                 }],
                 "subject": "Volvox DaVinci",
-                "text": 'Dear ' + name + ", Test email from VolVox."
+                "html": EMAIL_TPL_REGISTER
             }
         };
 
@@ -160,7 +181,7 @@ angular.module('app.services', [])
                     "email": email
                 }],
                 "subject": "Your photo",
-                "text": 'Dear ' + name + ", Test email from VolVox."
+                "html": EMAIL_PHOTO_COMPILED
             }
         };
         m.messages.send(params, function(res) {

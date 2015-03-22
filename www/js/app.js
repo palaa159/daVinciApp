@@ -23,6 +23,16 @@ var EVENT_FOLDER = localStorage['event_folder'] || 'test_event';
 var EVENT_BG;
 var EVENT_DISCLAIMER;
 
+// Email thing
+var EMAIL_TPL_REGISTER;
+var EMAIL_TPL_PHOTO;
+var EMAIL_PHOTO_COMPILED;
+
+// IMG TO SHARE
+var IMG_TO_SHARE;
+
+
+
 var PREV_NOW = new Date().getTime();
 
 angular.module(APP_NAME, [
@@ -70,16 +80,22 @@ angular.module(APP_NAME, [
         $rootScope.settings.mandrill_token = MANDRILL_TOKEN;
         $rootScope.settings.facebook_app_id = FACEBOOK_APP_ID;
         $rootScope.startOver = function() {
-            // Clear cookies
-            if (window.cordova) {
-                window.cookies.clear(function() {
-                    console.log('Cookies cleared!');
-                });
-            }
             // Restart
             console.log('go to welcome');
             $state.go('/01-welcome');
         };
+
+        // TEST GET HTML
+        Dropbox.getEmailTplRegister(function(res) {
+            // console.log(res);
+            EMAIL_TPL_REGISTER = res;
+        });
+
+        Dropbox.getEmailTplPhoto(function(res) {
+            // console.log(res);
+            EMAIL_TPL_PHOTO = res;
+        });
+
         // GET ACCOUNT INFO
         Dropbox.getAccountInfo(function(result) {
             console.log(result);
@@ -133,7 +149,7 @@ angular.module(APP_NAME, [
     $rootScope.goToPage = function(page) {
         //
         var now = new Date().getTime();
-        if (now - PREV_NOW > 180 * 1000) {
+        if (now - PREV_NOW > 180 * 1000 && !$rootScope.isWelcomePage) {
             // reset
             $rootScope.startOver();
         } else {
