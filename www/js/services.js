@@ -134,7 +134,7 @@ angular.module('app.services', [])
     service.returnDirectLink = function(path, cb) {
         // "/davinci_app/test_event/photobooth/6a010535647bf3970b015390876439970b-500wi.jpg"
         var link;
-        $http.get('https://api.dropbox.com/1/media/auto' + path, {
+        $http.get('https://api.dropbox.com/1/shares/auto' + path, {
             headers: {
                 'Authorization': 'Bearer ' + DROPBOX_TOKEN
             }
