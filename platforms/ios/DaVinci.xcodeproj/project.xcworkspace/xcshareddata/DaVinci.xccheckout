@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>14D37962-35A7-4A56-9DDD-518CE5677741</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DaVinci</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>26F0F1D128FCC40C77D50E67A8E0231977873E0C</key>
+		<string>https://github.com/palaa159/daVinciApp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/DaVinci.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>26F0F1D128FCC40C77D50E67A8E0231977873E0C</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/palaa159/daVinciApp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>26F0F1D128FCC40C77D50E67A8E0231977873E0C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>26F0F1D128FCC40C77D50E67A8E0231977873E0C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>davinci_v2</string>
+		</dict>
+	</array>
+</dict>
+</plist>

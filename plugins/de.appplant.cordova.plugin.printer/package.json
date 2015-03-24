@@ -1,0 +1,26 @@
+{
+    "version": "0.6.1",
+    "name": "de.appplant.cordova.plugin.printer",
+    "cordova_name": "Printer",
+    "description": "\n        Cordova plugin to print HTML documents using AirPrint and Google Cloud Print.\n    ",
+    "license": "Apache 2.0",
+    "repo": "\n        https://github.com/katzer/cordova-plugin-printer/tree/google-cloud-print\n    ",
+    "keywords": [
+        "\n        print",
+        " printer",
+        " ios",
+        " android",
+        " google cloud",
+        " air print\n    "
+    ],
+    "platforms": [
+        "ios",
+        "android"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0.0"
+        }
+    ]
+}
