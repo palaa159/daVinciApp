@@ -216,19 +216,35 @@ angular.module('app.controllers', [])
 
                         Mandrill.sharePhoto($rootScope.userToSend, $rootScope.emailToSend, function() {
                             $rootScope.socialToShare = 'Email';
-                            $scope.closeThisDialog();
-                            $rootScope.goToPage('/05-thankyou');
+                            // $scope.closeThisDialog();
+                            // $rootScope.goToPage('/05-thankyou');
+                            Dialogs.confirm('Your photo has been sent. Would you like to share again?', ['No, I\'m Finished', 'Share Again'], function() {
+                                // No
+                                $scope.closeThisDialog();
+                                $rootScope.goToPage('/05-thankyou');
+                            }, function() {
+                                // Yes
+                                $scope.closeThisDialog();
+                            });
                         });
                     });
 
                 };
                 $scope.shareViaPrint = function() {
                     console.log('HIT PRINTER');
-                    var page = '<img src="' + IMG_TO_SHARE + '">';
+                    var page = '<center><img style="margin-top: 100px;" width="100%" src="' + IMG_TO_SHARE + '"></center>';
                     cordova.plugins.printer.print(page, 'Document.html', function() {
                         $rootScope.socialToShare = 'Print';
-                        $scope.closeThisDialog();
-                        $rootScope.goToPage('/05-thankyou');
+                        // $scope.closeThisDialog();
+                        // $rootScope.goToPage('/05-thankyou');
+                        Dialogs.confirm('Your photo has been printed. Would you like to share again?', ['No, I\'m Finished', 'Share Again'], function() {
+                                // No
+                                $scope.closeThisDialog();
+                                $rootScope.goToPage('/05-thankyou');
+                            }, function() {
+                                // Yes
+                                $scope.closeThisDialog();
+                            });
                     });
                 };
             }

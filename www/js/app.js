@@ -9,13 +9,13 @@
  */
 var APP_NAME = 'DAVINCIAPP';
 var APP_PASSWD = '@volvox@';
-var DROPBOX_FOLDER = 'Davinci_app';
-var DROPBOX_TOKEN = localStorage['dropbox_token'] || 'kbIy1EpakoMAAAAAAADJ5r4h5VhfFIUhFQkfn3NfCm_66gDrKr3AhCCLlwADalJH';
+var DROPBOX_FOLDER = 'VVox_DaVinci_Application';
+var DROPBOX_TOKEN = localStorage['dropbox_token'] || 'oI4FaXeef54AAAAAAACQfdoh5qtGO6oVdh1FTofQYAHacQyi11SStjiANcXtgXCs';
 // Correct vvv
 var MANDRILL_EMAIL = localStorage['mandrill_email'] || 'davinci@volvoxlabs.com';
 var MANDRILL_TOKEN = localStorage['mandrill_token'] || 'gRxJVxhYFO9JyWmDsvq9ow';
 // Facebook APP ID
-var FACEBOOK_APP_ID = localStorage['facebook_app_id'] || '385155071666492';
+var FACEBOOK_APP_ID = localStorage['facebook_app_id'] || '349608991915880';
 
 var EVENT_NAME;
 var EVENT_FOLDER = localStorage['event_folder'] || 'test_event';

@@ -3,7 +3,7 @@
         <ion-slide ng-repeat="sixImages in gallery" class="slide-by-six">
             <div class="slide-box">
                 <div>
-                    <a ng-cloak ng-repeat="image in sixImages track by $index" style="text-decoration: none;" ng-click="openImageModal(image)">
+                    <a ng-cloak ng-repeat="image in sixImages track by $index | limitTo: 5" style="text-decoration: none;" ng-click="openImageModal(image)">
                         <img class="gallery-image" ng-src="{{image}}" width="282" height="282">
                     </a>
                     <div class="clearfix"></div>
