@@ -94,6 +94,7 @@ angular.module('app.controllers', [])
     $state,
     $ionicViewSwitcher,
     Dropbox,
+    Dialogs,
     $ionicLoading,
     Mandrill) {
     console.log('```` Rendering Register');
@@ -146,6 +147,9 @@ angular.module('app.controllers', [])
                     $ionicViewSwitcher.nextDirection('forward');
                     $state.go('/03-gallery');
                 });
+            });
+        } else {
+            Dialogs.alert('One or more of your input is invalid. Please try again.', 'Got it', function() {
             });
         }
 
@@ -232,19 +236,20 @@ angular.module('app.controllers', [])
                 };
                 $scope.shareViaPrint = function() {
                     console.log('HIT PRINTER');
-                    var page = '<center><img style="margin-top: 100px;" width="100%" src="' + IMG_TO_SHARE + '"></center>';
+                    var page =
+                        '<center><div style="position: relative; margin-top: 100px;"><img width="100%" src="' + IMG_TO_SHARE + '"><img width="100%" style="position: absolute; z-index: 9; top: 0; left: 0;" src="' + $rootScope.overlayImg + '"></div></center>';
                     cordova.plugins.printer.print(page, 'Document.html', function() {
                         $rootScope.socialToShare = 'Print';
                         // $scope.closeThisDialog();
                         // $rootScope.goToPage('/05-thankyou');
                         Dialogs.confirm('Your photo has been printed. Would you like to share again?', ['No, I\'m Finished', 'Share Again'], function() {
-                                // No
-                                $scope.closeThisDialog();
-                                $rootScope.goToPage('/05-thankyou');
-                            }, function() {
-                                // Yes
-                                $scope.closeThisDialog();
-                            });
+                            // No
+                            $scope.closeThisDialog();
+                            $rootScope.goToPage('/05-thankyou');
+                        }, function() {
+                            // Yes
+                            $scope.closeThisDialog();
+                        });
                     });
                 };
             }

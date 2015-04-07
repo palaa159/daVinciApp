@@ -28,6 +28,7 @@ var EMAIL_TPL_REGISTER;
 var EMAIL_TPL_PHOTO;
 var EMAIL_PHOTO_COMPILED;
 
+var IMG_OVERLAY;
 // IMG TO SHARE
 var IMG_TO_SHARE;
 
@@ -39,7 +40,7 @@ angular.module(APP_NAME, [
     'ionic',
     'ngCordova',
     'ngDialog',
-    'ngRetina',
+    // 'ngRetina',
     'app.controllers',
     'app.services'
 ])
@@ -105,8 +106,14 @@ angular.module(APP_NAME, [
 
             EVENT_NAME = res.event_name;
             EVENT_BG = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_bg.jpg';
+            IMG_OVERLAY = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/overlay.png';
 
             $rootScope.msgToShare = res.share_comment;
+            $rootScope.disclaimer = res.disclaimer;
+
+            Dropbox.returnDirectLink(IMG_OVERLAY, function(d) {
+                $rootScope.overlayImg = d;
+            });
 
             Dropbox.returnDirectLink(EVENT_BG, function(d) {
                 $rootScope.backgroundBg = d;
