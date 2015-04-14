@@ -1,0 +1,38 @@
+<ion-view>
+	<ion-content class="padding" scroll="false">
+		<div name="userForm" nonvalidate id="register-container">
+			<div class="register-name">
+				<div class="left light">
+					NAME:
+				</div>
+				<div class="right light">
+					<input class="energized register-input" type="text" ng-model="user.name" ng-change="checkInput()" maxlength="20" required>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="register-email">
+				<div class="left light">
+					EMAIL:
+				</div>
+				<div class="right light">
+					<input class="energized register-input" type="email" ng-model="user.email" ng-change="checkInput()" required>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="register-disclaimer">
+				<div class="left light">
+					DISCLAIMER:
+				</div>
+				<div class="right light">
+					<div id="textarea-disclaimer">
+						{{disclaimer}}
+					</div>
+					<button id="register-cancel" class="btn-register light" ng-click="cancel()">CANCEL</button>
+					<button id="register-submit" class="btn-register" ng-class="{'energized': isFormValid}" ng-click="register()">I AGREE</button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+
+	</ion-content>
+</ion-view>

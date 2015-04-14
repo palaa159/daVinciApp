@@ -1,0 +1,37 @@
+<ion-view>
+	<ion-content class="padding" scroll="false" style="background: #000">
+		<div class="settings-container">
+			<h1 class="light">Settings</h1>
+			<div class="light">
+				<div class="setting-item">
+					<h3 class="light">Event Folder</h3>
+					<input type="text" ng-model="settings.event_folder">
+					<button class="button" ng-click="confirmEvent()">Confirm</button>
+				</div>
+				<div class="setting-item">
+					<h3 class="light">Dropbox Token</h3>
+					<input type="text" ng-model="settings.dropbox_token">
+					<button class="button" ng-click="confirmDropboxToken()">Confirm</button>
+				</div>
+				<div class="setting-item">
+					<h3 class="light">Mandrill Token</h3>
+					<input type="text" ng-model="settings.mandrill_token">
+					<button class="button" ng-click="confirmMandrillToken()">Confirm</button>
+				</div>
+				<div class="setting-item">
+					<h3 class="light">Mandrill Email</h3>
+					<input type="text" ng-model="settings.mandrill_email">
+					<button class="button" ng-click="confirmMandrillEmail()">Confirm</button>
+				</div>
+				<div class="setting-item">
+					<h3 class="light">Facebook App ID</h3>
+					<input type="text" ng-model="settings.facebook_app_id">
+					<button class="button" ng-click="confirmFacebookAppId()">Confirm</button>
+				</div>
+			</div>
+
+			<button class="button" ng-click="back()">Back</button>
+
+		</div>
+	</ion-content>
+</ion-view>
