@@ -85,6 +85,7 @@ angular.module('app.controllers', [])
     console.log('```` Rendering Welcome');
     $rootScope.backgroundPosX = 0;
     $rootScope.isWelcomePage = true;
+    $rootScope.shouldHide = true;
 })
 
 /* 02-register */

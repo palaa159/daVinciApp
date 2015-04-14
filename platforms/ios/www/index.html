@@ -30,11 +30,12 @@
   <body ng-app="DAVINCIAPP" style="background: url({{backgroundBg}}) fixed;" class="platform-ios platform-cordova platform-webview">
 
     <div class="davinci-bar">
-        DaVinci
+        <!-- DaVinci -->
+        &nbsp;
     </div>
 
     <div class="start-over-container">
-      <button class="button light" style="background: rgba(255,255,255,0.25); border: none; margin: 10px; min-height: 40px;" ng-click="startOver()">Start Over</button>
+      <button ng-hide="shouldHide" class="button light" style="background: rgba(255,255,255,0.25); border: none; margin: 10px; min-height: 40px;" ng-click="startOver()">Start Over</button>
     </div>
     <ion-nav-view class="transparent-bg">
     <!-- Content of rendered page goes page -->
