@@ -18,5 +18,8 @@
     "org.apache.cordova.statusbar",
     "org.apache.cordova.splashscreen",
     "org.apache.cordova.dialogs"
+  ],
+  "cordovaPlatforms": [
+    "ios"
   ]
 }

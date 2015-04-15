@@ -165,7 +165,7 @@ angular.module(APP_NAME, [
   $rootScope.goToPage = function(page) {
     //
     var now = new Date().getTime();
-    if (now - PREV_NOW > 180 * 1000 && !$rootScope.isWelcomePage) {
+    if (now - PREV_NOW > 600 * 1000 && !$rootScope.isWelcomePage) {
       // reset
       $rootScope.startOver();
     } else {
