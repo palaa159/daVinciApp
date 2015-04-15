@@ -20,6 +20,7 @@ var FACEBOOK_APP_ID = localStorage['facebook_app_id'] || '349608991915880';
 var EVENT_NAME;
 var EVENT_FOLDER = localStorage['event_folder'] || 'test_event';
 
+var EVENT_LOGO;
 var EVENT_BG;
 var EVENT_DISCLAIMER;
 
@@ -109,6 +110,7 @@ angular.module(APP_NAME, [
       console.log(res);
 
       EVENT_NAME = res.event_name;
+      EVENT_LOGO = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_logo.png';
       EVENT_BG = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_bg.jpg';
       IMG_OVERLAY = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/overlay.png';
 
@@ -117,6 +119,10 @@ angular.module(APP_NAME, [
 
       Dropbox.returnDirectLink(IMG_OVERLAY, function(d) {
         $rootScope.overlayImg = d;
+      });
+
+      Dropbox.returnDirectLink(EVENT_LOGO, function(d) {
+        $rootScope.event_logo = d;
       });
 
       Dropbox.returnDirectLink(EVENT_BG, function(d) {
