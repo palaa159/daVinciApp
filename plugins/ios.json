@@ -51,34 +51,6 @@
                         {
                             "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
                             "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"ios-package\" value=\"FacebookConnectPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<plugin name=\"FacebookConnectPlugin\" value=\"FacebookConnectPlugin\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://m.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://graph.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://api.facebook.com\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://*.fbcdn.net\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<access origin=\"https://*.akamaihd.net\" />",
-                            "count": 1
                         }
                     ]
                 }
@@ -87,60 +59,14 @@
                 "parents": {
                     "AudioToolbox.framework": [
                         {
-                            "xml": true,
+                            "xml": "true",
                             "count": 1
                         }
                     ],
                     "CoreGraphics.framework": [
                         {
-                            "xml": false,
+                            "xml": "false",
                             "count": 2
-                        }
-                    ],
-                    "libsqlite3.dylib": [
-                        {
-                            "xml": false,
-                            "count": 1
-                        }
-                    ],
-                    "Social.framework": [
-                        {
-                            "xml": true,
-                            "count": 1
-                        }
-                    ],
-                    "Accounts.framework": [
-                        {
-                            "xml": true,
-                            "count": 1
-                        }
-                    ],
-                    "Security.framework": [
-                        {
-                            "xml": true,
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "*-Info.plist": {
-                "parents": {
-                    "FacebookAppID": [
-                        {
-                            "xml": "<string>349608991915880</string>",
-                            "count": 1
-                        }
-                    ],
-                    "FacebookDisplayName": [
-                        {
-                            "xml": "<string>DaVinci: VVox</string>",
-                            "count": 1
-                        }
-                    ],
-                    "CFBundleURLTypes": [
-                        {
-                            "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>fb349608991915880</string></array></dict></array>",
-                            "count": 1
                         }
                     ]
                 }
@@ -152,6 +78,11 @@
             "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
         },
         "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
+        },
+        "com.phonegap.plugins.facebookconnect": {
+            "APP_ID": "349608991915880",
+            "APP_NAME": "DaVinci: VVox",
             "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
         },
         "de.appplant.cordova.plugin.printer": {
@@ -173,11 +104,6 @@
             "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
         },
         "org.apache.cordova.statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
-        },
-        "com.phonegap.plugins.facebookconnect": {
-            "APP_ID": "349608991915880",
-            "APP_NAME": "DaVinci: VVox",
             "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
         }
     },

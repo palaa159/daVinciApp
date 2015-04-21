@@ -56,34 +56,28 @@
     <string>${PRODUCT_NAME}</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
-    <key>CFBundleShortVersionString</key>
-    <string>0.0.1</string>
     <key>CFBundleSignature</key>
     <string>????</string>
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>fb349608991915880</string>
-        </array>
-      </dict>
-    </array>
     <key>CFBundleVersion</key>
     <string>0.0.1</string>
-    <key>FacebookAppID</key>
-    <string>349608991915880</string>
-    <key>FacebookDisplayName</key>
-    <string>DaVinci: VVox</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.0.1</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSMainNibFile</key>
     <string></string>
     <key>NSMainNibFile~ipad</key>
     <string></string>
-    <key>UIInterfaceOrientation</key>
+    <key>UISupportedInterfaceOrientations</key>
     <array>
+      <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
       <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>UILaunchImages</key>
     <array>
@@ -187,15 +181,6 @@
         <key>UILaunchImageSize</key>
         <string>{768, 1024}</string>
       </dict>
-    </array>
-    <key>UISupportedInterfaceOrientations</key>
-    <array>
-      <string>UIInterfaceOrientationLandscapeLeft</string>
-      <string>UIInterfaceOrientationLandscapeRight</string>
-    </array>
-    <key>UISupportedInterfaceOrientations~ipad</key>
-    <array>
-      <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
   </dict>
 </plist>

@@ -15,6 +15,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/com.phonegap.plugins.facebookconnect/facebookConnectPlugin.js",
+        "id": "com.phonegap.plugins.facebookconnect.FacebookConnectPlugin",
+        "clobbers": [
+            "facebookConnectPlugin"
+        ]
+    },
+    {
         "file": "plugins/de.appplant.cordova.plugin.printer/www/printer.js",
         "id": "de.appplant.cordova.plugin.printer.Printer",
         "clobbers": [
@@ -71,13 +78,6 @@ module.exports = [
         "clobbers": [
             "window.StatusBar"
         ]
-    },
-    {
-        "file": "plugins/com.phonegap.plugins.facebookconnect/facebookConnectPlugin.js",
-        "id": "com.phonegap.plugins.facebookconnect.FacebookConnectPlugin",
-        "clobbers": [
-            "facebookConnectPlugin"
-        ]
     }
 ];
 module.exports.metadata = 
@@ -85,14 +85,14 @@ module.exports.metadata =
 {
     "com.bez4pieci.cookies": "0.0.1",
     "com.ionic.keyboard": "1.0.4",
+    "com.phonegap.plugins.facebookconnect": "0.11.0",
     "de.appplant.cordova.plugin.printer": "0.6.1",
     "org.apache.cordova.console": "0.2.13",
     "org.apache.cordova.device": "0.3.0",
     "org.apache.cordova.dialogs": "0.3.0",
     "org.apache.cordova.inappbrowser": "0.6.1-dev",
     "org.apache.cordova.splashscreen": "1.0.0",
-    "org.apache.cordova.statusbar": "0.1.10",
-    "com.phonegap.plugins.facebookconnect": "0.11.0"
+    "org.apache.cordova.statusbar": "0.1.10"
 }
 // BOTTOM OF METADATA
 });
