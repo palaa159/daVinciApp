@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		042509A02F5C47459F935624 /* APPPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 068EAB223DF849D3AA8877B1 /* APPPrinter.m */; };
 		0ADD494BB8134FC88F7A7133 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD1475015C48D782A7ECB0 /* CDVNotification.m */; };
@@ -482,7 +481,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = DaVinci;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "2";
 			};
 			name = Debug;
 		};
@@ -512,7 +511,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = DaVinci;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "2";
 			};
 			name = Release;
 		};

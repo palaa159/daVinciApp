@@ -1,12 +1,19 @@
 {
   "name": "davinci_v2",
-  "private": "true",
+  "description": "DaVinci Photobooth App",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-rc.1"
   },
   "dependencies": {
     "ngCordova": "~0.1.12-alpha",
     "ngDialog": "~0.3.12",
-    "async": "~0.9.2"
-  }
+    "async": "~0.9.2",
+    "lodash": "~3.7.0"
+  },
+  "version": "0.1.1",
+  "homepage": "http://volvoxlabs.com",
+  "authors": [
+    "reach.apon@gmail.com",
+    "joe@momentus.io"
+  ]
 }

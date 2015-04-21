@@ -33,8 +33,6 @@ var IMG_OVERLAY;
 // IMG TO SHARE
 var IMG_TO_SHARE;
 
-
-
 var PREV_NOW = new Date().getTime();
 
 angular.module(APP_NAME, [

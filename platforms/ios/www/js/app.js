@@ -39,6 +39,7 @@ var PREV_NOW = new Date().getTime();
 
 angular.module(APP_NAME, [
   'ionic',
+  'lodash',
   'ngCordova',
   'ngDialog',
   // 'ngRetina',
