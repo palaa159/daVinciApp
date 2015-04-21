@@ -1,6 +1,13 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/com.phonegap.plugins.facebookconnect/facebookConnectPlugin.js",
+        "id": "com.phonegap.plugins.facebookconnect.FacebookConnectPlugin",
+        "clobbers": [
+            "facebookConnectPlugin"
+        ]
+    },
+    {
         "file": "plugins/com.bez4pieci.cookies/www/cookies.js",
         "id": "com.bez4pieci.cookies.cookies",
         "clobbers": [
@@ -12,13 +19,6 @@ module.exports = [
         "id": "com.ionic.keyboard.keyboard",
         "clobbers": [
             "cordova.plugins.Keyboard"
-        ]
-    },
-    {
-        "file": "plugins/com.phonegap.plugins.facebookconnect/facebookConnectPlugin.js",
-        "id": "com.phonegap.plugins.facebookconnect.FacebookConnectPlugin",
-        "clobbers": [
-            "facebookConnectPlugin"
         ]
     },
     {
@@ -83,9 +83,9 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "com.phonegap.plugins.facebookconnect": "0.11.0",
     "com.bez4pieci.cookies": "0.0.1",
     "com.ionic.keyboard": "1.0.4",
-    "com.phonegap.plugins.facebookconnect": "0.11.0",
     "de.appplant.cordova.plugin.printer": "0.6.1",
     "org.apache.cordova.console": "0.2.13",
     "org.apache.cordova.device": "0.3.0",

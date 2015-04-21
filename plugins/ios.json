@@ -10,47 +10,47 @@
                     "/*": [
                         {
                             "xml": "<feature name=\"Cookies\"><param name=\"ios-package\" value=\"CDVCookies\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<feature name=\"Printer\"><param name=\"ios-package\" value=\"APPPrinter\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<feature name=\"Notification\"><param name=\"ios-package\" value=\"CDVNotification\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
-                            "count": 1
+                            "count": 2
                         }
                     ]
                 }
@@ -60,13 +60,13 @@
                     "AudioToolbox.framework": [
                         {
                             "xml": "true",
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "CoreGraphics.framework": [
                         {
                             "xml": "false",
-                            "count": 2
+                            "count": 4
                         }
                     ]
                 }
@@ -74,15 +74,15 @@
         }
     },
     "installed_plugins": {
+        "com.phonegap.plugins.facebookconnect": {
+            "APP_ID": "349608991915880",
+            "APP_NAME": "DaVinci: VVOX",
+            "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
+        },
         "com.bez4pieci.cookies": {
             "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
         },
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
-        },
-        "com.phonegap.plugins.facebookconnect": {
-            "APP_ID": "349608991915880",
-            "APP_NAME": "DaVinci: VVox",
             "PACKAGE_NAME": "com.ionicframework.davinciv2428782"
         },
         "de.appplant.cordova.plugin.printer": {
