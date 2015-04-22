@@ -5,7 +5,8 @@
 	<textarea maxlength="70" ng-model="msgToShare"></textarea>
 	<button class="button btnBack light" ng-click="back()">CANCEL</button>
 	<!--  -->
-	<button ng-if="socialToShare == 'Facebook'" class="button btnConfirmShare energized" ng-click="postOnFb(msgToShare)">POST</button>
+	<button ng-if="socialToShare == 'Facebook'" class="button btnConfirmShare energized" ng-click="postOnFb(msgToShare)">POST TO FACEBOOK</button>
+	<button ng-if="socialToShare == 'Twitter'" class="button btnConfirmShare energized" ng-click="postOnTwitter(msgToShare)">POST TO TWITTER</button>
 	<!--  -->
 </div>
 </ion-content>

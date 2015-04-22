@@ -7,19 +7,26 @@
  * – Inappbrowser
  
  */
-var APP_NAME = 'DAVINCIAPP';
-var APP_PASSWD = '@volvox@';
-var DROPBOX_FOLDER = 'VVox_DaVinci_Application';
-var DROPBOX_TOKEN = localStorage['dropbox_token'] || 'oI4FaXeef54AAAAAAACQfdoh5qtGO6oVdh1FTofQYAHacQyi11SStjiANcXtgXCs';
+var APP_NAME          = 'DAVINCIAPP';
+var APP_PASSWD        = '@volvox@';
+
+// Dropbox API
+var DROPBOX_FOLDER     = 'VVox_DaVinci_Application';
+var DROPBOX_TOKEN      = localStorage['dropbox_token']  || 'oI4FaXeef54AAAAAAACQfdoh5qtGO6oVdh1FTofQYAHacQyi11SStjiANcXtgXCs';
+
 // Correct vvv
-var MANDRILL_EMAIL = localStorage['mandrill_email'] || 'davinci@volvoxlabs.com';
-var MANDRILL_TOKEN = localStorage['mandrill_token'] || 'gRxJVxhYFO9JyWmDsvq9ow';
+var MANDRILL_EMAIL     = localStorage['mandrill_email'] || 'davinci@volvoxlabs.com';
+var MANDRILL_TOKEN     = localStorage['mandrill_token'] || 'gRxJVxhYFO9JyWmDsvq9ow';
+
 // Facebook APP ID
-var FACEBOOK_APP_ID = localStorage['facebook_app_id'] || '349608991915880';
+var FACEBOOK_APP_ID    = localStorage['facebook_app_id'] || '349608991915880';
 
+// Twitter API Keys
+var TWITTER_API_KEY    = localStorage['twitter_api_key'] || '0Im4waStH8fPjaxhsoxmOLuLE';
+var TWITTER_SECRET_KEY = localStorage['twitter_secret_key'] || 'VqRPqUe6QsQE4cmjHDIhRljBI8GnJgB8v79Z0Uxdw5uhWHPMmr';
+
+var EVENT_FOLDER       = localStorage['event_folder'] || 'default_event';
 var EVENT_NAME;
-var EVENT_FOLDER = localStorage['event_folder'] || 'test_event';
-
 var EVENT_LOGO;
 var EVENT_BG;
 var EVENT_DISCLAIMER;
@@ -30,7 +37,6 @@ var EMAIL_TPL_PHOTO;
 var EMAIL_PHOTO_COMPILED;
 
 var IMG_OVERLAY;
-// IMG TO SHARE
 var IMG_TO_SHARE;
 
 var PREV_NOW = new Date().getTime();
@@ -79,6 +85,8 @@ angular.module(APP_NAME, [
     $rootScope.settings.mandrill_email = MANDRILL_EMAIL;
     $rootScope.settings.mandrill_token = MANDRILL_TOKEN;
     $rootScope.settings.facebook_app_id = FACEBOOK_APP_ID;
+    $rootScope.settings.twitter_api_key = TWITTER_API_KEY;
+    $rootScope.settings.twitter_secret_key = TWITTER_SECRET_KEY;
     $rootScope.startOver = function() {
       // Restart
       console.log('go to welcome');

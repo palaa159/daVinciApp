@@ -1,5 +1,5 @@
 <ion-view>
-	<ion-content class="padding" scroll="false" style="background: #000">
+	<ion-content class="padding" scroll="true" style="background: #000">
 		<div class="settings-container">
 			<h1 class="light">Settings</h1>
 			<div class="light">
@@ -27,6 +27,16 @@
 					<h3 class="light">Facebook App ID</h3>
 					<input type="text" ng-model="settings.facebook_app_id">
 					<button class="button" ng-click="confirmFacebookAppId()">Confirm</button>
+				</div>
+				<div class="setting-item">
+					<h3 class="light">Twitter API Key</h3>
+					<input type="text" ng-model="settings.twitter_api_key">
+					<button class="button" ng-click="confirmTwitterApiKey()">Confirm</button>
+				</div>
+				<div class="setting-item">
+					<h3 class="light">Twitter Secret Key</h3>
+					<input type="text" ng-model="settings.twitter_secret_key">
+					<button class="button" ng-click="confirmTwitterSecretKey()">Confirm</button>
 				</div>
 			</div>
 

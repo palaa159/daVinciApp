@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		1CAD0FD3DB824A2B964ECDD5 /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B8443519DA40F28BFEC687 /* CDVNotification.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
@@ -52,6 +51,9 @@
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		E3846E92EA2444D29B082B87 /* UIWebViewExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D522BEB45B3487BAF54F9E2 /* UIWebViewExtension.m */; };
 		E9B6075F036647EDAD65BE3A /* CDVNotification.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20F676151E8C4E558A3D06E7 /* CDVNotification.bundle */; };
+		83F95E24AA2042B9BB62C5DC /* SocialSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE39FB92D99245A492FB45B4 /* SocialSharing.m */; };
+		490C85E6EAFF48DE96267460 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448003457DB84728A746C2CF /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CE6FC2BD006A4E02BF25E629 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ADAC8AA969C4D3984E35C74 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +139,10 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = DaVinci/config.xml; sourceTree = "<group>"; };
+		CE39FB92D99245A492FB45B4 /* SocialSharing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "SocialSharing.m"; path = "nl.x-services.plugins.socialsharing/SocialSharing.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		0CA90EF79F1441518D1C599A /* SocialSharing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SocialSharing.h"; path = "nl.x-services.plugins.socialsharing/SocialSharing.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		448003457DB84728A746C2CF /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Social.framework"; path = "System/Library/Frameworks/Social.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		9ADAC8AA969C4D3984E35C74 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +155,8 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				A121D9837B6546EB9988E754 /* AudioToolbox.framework in Frameworks */,
+				490C85E6EAFF48DE96267460 /* Social.framework in Frameworks */,
+				CE6FC2BD006A4E02BF25E629 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +231,8 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
 				14F3D9EB42BD4D5584A35BCF /* AudioToolbox.framework */,
+				448003457DB84728A746C2CF /* Social.framework */,
+				9ADAC8AA969C4D3984E35C74 /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -258,6 +268,8 @@
 				DF9BD7C3C8B34FF9B72F6771 /* CDVSplashScreen.h */,
 				6EDCBAAF0B884B1581AD3A7F /* CDVStatusBar.m */,
 				30E00E0C00E34E1AA386687E /* CDVStatusBar.h */,
+				CE39FB92D99245A492FB45B4 /* SocialSharing.m */,
+				0CA90EF79F1441518D1C599A /* SocialSharing.h */,
 			);
 			name = Plugins;
 			path = DaVinci/Plugins;
@@ -458,6 +470,7 @@
 				A6C3CC48DA64424F81273C01 /* CDVInAppBrowser.m in Sources */,
 				4AB06D1CF90343F488D0A8F3 /* CDVSplashScreen.m in Sources */,
 				894CECF1C04F432B8362995B /* CDVStatusBar.m in Sources */,
+				83F95E24AA2042B9BB62C5DC /* SocialSharing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +513,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = DaVinci;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "2";
 			};
 			name = Debug;
 		};
@@ -530,7 +543,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = DaVinci;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "2";
 			};
 			name = Release;
 		};

@@ -37,6 +37,16 @@ angular.module('app.controllers', [])
     FACEBOOK_APP_ID = localStorage['facebook_app_id'];
   };
 
+  $scope.confirmTwitterApiKey = function() {
+    localStorage['twitter_api_key'] = $rootScope.settings.twitter_api_key;
+    TWITTER_API_KEY = localStorage['twitter_api_key'];
+  };
+
+  $scope.confirmTwitterSecretKey = function() {
+    localStorage['twitter_secret_key'] = $rootScope.settings.twitter_secret_key;
+    TWITTER_SECRET_KEY = localStorage['twitter_secret_key'];
+  };
+
   $scope.back = function() {
     Dropbox.getSettings(function(res) {
       console.log(res);
@@ -75,7 +85,6 @@ angular.module('app.controllers', [])
       });
     });
   };
-
 })
 
 /* 01-welcome */
@@ -152,7 +161,6 @@ angular.module('app.controllers', [])
     } else {
       Dialogs.alert('One or more of your inputs is invalid. Please try again.', 'Got it', function() {});
     }
-
   };
 })
 
@@ -162,6 +170,7 @@ angular.module('app.controllers', [])
   $rootScope,
   $cordovaOauth,
   $cordovaPrinter,
+  $cordovaSocialSharing,
   Mandrill,
   ngDialog,
   Dialogs,
@@ -179,8 +188,34 @@ angular.module('app.controllers', [])
       template: 'views/imageModal.html',
       scope: $scope,
       controller: function($scope, $rootScope) {
-        // controller logic
         console.log('you just selected %s', IMG_TO_SHARE);
+
+        /*** TWITTER LOGIN ***/
+        $scope.shareViaTwitter = function() {
+          if (window.cordova) {
+            window.cookies.clear(function() {
+              console.log('Cookies cleared!');
+            });
+          }
+          $cordovaOauth.twitter( TWITTER_API_KEY, TWITTER_SECRET_KEY )
+          .then(function(result) {
+            console.log('twitter login results: ' + JSON.stringify(result, null, '\t'));
+            /* example result object: 
+              { "oauth_token": "2795506425-A7gBaNkh1cKbNUKkivnjtldMVvbJ7AXlL4BdC4I",
+                "oauth_token_secret": "DLIy2ux3n2U4Aq6wcoSIiyNlm7KcEiEzFpNcbGMQwOyJh",
+                "user_id": "2795506425", "screen_name": "momentus_io" } */
+            $rootScope.socialToShare = 'Twitter';
+            $rootScope.twitter_token = result.oauth_token;
+            $scope.closeThisDialog();
+            $rootScope.goToPage('/04-share');
+          }, function(error) {
+            console.log('twitter login error: ' + JSON.stringify(error, null, '\t'));
+            $rootScope.isErrorSignIn = true;
+            Dialogs.alert('Unable to complete the sign-in process. Please try again.', 'Got it');
+          });
+        };
+
+        /*** FACEBOOK LOGIN ***/
         $scope.shareViaFacebook = function() {
           if (window.cordova) {
             window.cookies.clear(function() {
@@ -188,18 +223,20 @@ angular.module('app.controllers', [])
             });
           }
           $cordovaOauth.facebook(FACEBOOK_APP_ID, ['email', 'publish_actions'])
-            .then(function(result) {
-              console.log('fb login results: ' + JSON.stringify(result));
-              $rootScope.socialToShare = 'Facebook';
-              $rootScope.fb_token = result.access_token;
-              $scope.closeThisDialog();
-              $rootScope.goToPage('/04-share');
-            }, function(error) {
-              console.log('error: ' + error);
-              $rootScope.isErrorSignIn = true;
-              Dialogs.alert('Unable to complete the sign-in process. Please try again.', 'Got it');
-            });
+          .then(function(result) {
+            console.log('fb login results: ' + JSON.stringify(result,null,'\t'));
+            $rootScope.socialToShare = 'Facebook';
+            $rootScope.fb_token = result.access_token;
+            $scope.closeThisDialog();
+            $rootScope.goToPage('/04-share');
+          }, function(error) {
+            console.log('error: ' + error);
+            $rootScope.isErrorSignIn = true;
+            Dialogs.alert('Unable to complete the sign-in process. Please try again.', 'Got it');
+          });
         };
+
+        /*** MANDRILL ***/
         $scope.shareViaEmail = function() {
           console.log('Share via Email');
           Dialogs.confirm('Do you want to share this photo to your registered email?', ['Cancel', 'Send Email'], function() {
@@ -215,9 +252,7 @@ angular.module('app.controllers', [])
             EMAIL_PHOTO_COMPILED = compiled({
               'source_image': IMG_TO_SHARE
             });
-
             // console.log(EMAIL_TPL_PHOTO);
-
             Mandrill.sharePhoto($rootScope.userToSend, $rootScope.emailToSend, function() {
               $rootScope.socialToShare = 'Email';
               // $scope.closeThisDialog();
@@ -232,8 +267,9 @@ angular.module('app.controllers', [])
               });
             });
           });
-
         };
+
+        /*** AIR PRINT ***/
         $scope.shareViaPrint = function() {
           console.log('HIT PRINTER');
           var page =
@@ -251,11 +287,10 @@ angular.module('app.controllers', [])
               $scope.closeThisDialog();
             });
           });
-        };
-      }
-    });
-  };
-
+        }; // end shareViaPrint
+      }  // end controller
+    });// end ngDialog.open
+  }; // end openImageModal
 })
 
 /* 04-share */
@@ -264,6 +299,7 @@ angular.module('app.controllers', [])
   $rootScope,
   $ionicViewSwitcher,
   $http,
+  $cordovaSocialSharing,
   Dialogs,
   $ionicLoading,
   $state) {
@@ -273,6 +309,38 @@ angular.module('app.controllers', [])
   $scope.back = function() {
     $ionicViewSwitcher.nextDirection('back');
     $state.go('/03-gallery');
+  };
+
+  $scope.postOnTwitter = function(msgtoshare) {
+    console.log("hit postOnTwitter.");
+    $ionicLoading.show({
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 0
+    });
+    
+    /*** I BELIEVE THIS IS OUR ONLY SOLUTION: ***/
+    // https://dev.twitter.com/rest/reference/post/media/upload
+    // https://dev.twitter.com/rest/public/uploading-media
+    
+    //... will require downloading of the image to the device, and then uploading with:
+    // $http.post('')
+
+    // the only addon i could find that might work:
+    // (does not use iosAccounts or composeView): https://github.com/shoutem/cordova-ios-twitter
+
+
+    /*** THIS WILL WORK GREAT FOR MOMENTUS, BUT NOT FOR DAVINCI ***/
+    // $cordovaSocialSharing
+    // .shareViaTwitter(msgtoshare, IMG_TO_SHARE, 'http://volvoxlabs.com')
+    // .then(function(result) {
+    //   console.log("success on TWITTER POST: " + JSON.stringify(result,null,'\t'));
+    //   $rootScope.goToPage('/05-thankyou');
+    // }, function(err) {
+    //   console.log("error on TWITTER POST: " + JSON.stringify(err));
+    //   Dialogs.alert('Sorry, we\'re unable to post a photo on your Twitter. Please try again or choose another sharing option.', 'Got it');
+    // });
   };
 
   $scope.postOnFb = function(msgtoshare) {
