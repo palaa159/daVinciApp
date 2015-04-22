@@ -68,10 +68,6 @@
     <string></string>
     <key>NSMainNibFile~ipad</key>
     <string></string>
-    <key>UIInterfaceOrientation</key>
-    <array>
-      <string>UIInterfaceOrientationLandscapeLeft</string>
-    </array>
     <key>UILaunchImages</key>
     <array>
       <dict>
@@ -177,11 +173,11 @@
     </array>
     <key>UISupportedInterfaceOrientations</key>
     <array>
-      <string>UIInterfaceOrientationLandscapeLeft</string>
-      <string>UIInterfaceOrientationLandscapeRight</string>
+      <string>UIInterfaceOrientationPortrait</string>
     </array>
     <key>UISupportedInterfaceOrientations~ipad</key>
     <array>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
       <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
   </dict>

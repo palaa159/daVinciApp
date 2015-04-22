@@ -1,6 +1,13 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/com.phonegap.plugins.facebookconnect/facebookConnectPlugin.js",
+        "id": "com.phonegap.plugins.facebookconnect.FacebookConnectPlugin",
+        "clobbers": [
+            "facebookConnectPlugin"
+        ]
+    },
+    {
         "file": "plugins/com.bez4pieci.cookies/www/cookies.js",
         "id": "com.bez4pieci.cookies.cookies",
         "clobbers": [
@@ -71,11 +78,19 @@ module.exports = [
         "clobbers": [
             "window.StatusBar"
         ]
+    },
+    {
+        "file": "plugins/nl.x-services.plugins.socialsharing/www/SocialSharing.js",
+        "id": "nl.x-services.plugins.socialsharing.SocialSharing",
+        "clobbers": [
+            "window.plugins.socialsharing"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "com.phonegap.plugins.facebookconnect": "0.11.0",
     "com.bez4pieci.cookies": "0.0.1",
     "com.ionic.keyboard": "1.0.4",
     "de.appplant.cordova.plugin.printer": "0.6.1",
@@ -84,7 +99,8 @@ module.exports.metadata =
     "org.apache.cordova.dialogs": "0.3.0",
     "org.apache.cordova.inappbrowser": "0.6.1-dev",
     "org.apache.cordova.splashscreen": "1.0.0",
-    "org.apache.cordova.statusbar": "0.1.10"
+    "org.apache.cordova.statusbar": "0.1.10",
+    "nl.x-services.plugins.socialsharing": "4.3.17"
 }
 // BOTTOM OF METADATA
 });

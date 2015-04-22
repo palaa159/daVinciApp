@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>14D37962-35A7-4A56-9DDD-518CE5677741</string>
+	<string>73DCE05E-E53A-420F-81ED-539186C61EFA</string>
 	<key>IDESourceControlProjectName</key>
 	<string>DaVinci</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>26F0F1D128FCC40C77D50E67A8E0231977873E0C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>davinci_v2</string>
+			<string>daVinciApp</string>
 		</dict>
 	</array>
 </dict>

@@ -57,26 +57,26 @@ angular.module('app.services', [])
         }).then(function(result) {
             // return links via Dropbox media api
             $rootScope.gallery = [];
-            // TODO: Async
-            var i = 0;
+            var unorderedGallery = []; 
             async.each(result.data.contents, function(content, callback) {
-                function callback() {
-                    // console.log(result.data.contents.length, i);
-                    if (i === result.data.contents.length - 1) {
-                        // console.log('Done');
-                        if (cb) cb();
-                    } else {
-                        i++;
-                    }
-                }
                 service.returnDirectLink(content.path, function(result) {
-                    $rootScope.gallery.push(result);
+                    var thisImg = { path: content.path, link: result};
+                        /* example: 
+                        * { "path": "/VVox_DaVinci_Application/default_event/social_gallery/Two-Kittens-500x500 copy 2.jpg",
+                        *   "link": "https://www.dropbox.com/s/y9ca6y0c36hloy0/Two-Kittens-500x500%20copy%202.jpg?raw=1" }
+                        */
+                    unorderedGallery.push(thisImg);
                     callback();
                 });
             }, function(err) {
                 if (err) {
                     console.log(err);
+                    cb(err);
                 }
+                //console.log("UNORDEREDGALLERY: \n"+JSON.stringify(unorderedGallery, null, '\t'));
+                $rootScope.gallery = _.pluck(_.sortBy(unorderedGallery, 'path'), 'link');
+                console.log("$rootScope.gallery: \n"+JSON.stringify($rootScope.gallery, null, '\t'));
+                if(cb) cb();
             });
         });
     };
