@@ -97,6 +97,11 @@ angular.module(APP_NAME, [
 
     };
 
+    $rootScope.codeBird = new Codebird;
+    $rootScope.codeBird.setConsumerKey( TWITTER_API_KEY, TWITTER_SECRET_KEY );
+    $rootScope.codeBird.setUseProxy(false);
+    // $rootScope.codeBird.setProxy("http://requestb.in/1bi5bss1");
+
     // TEST GET HTML
     Dropbox.getEmailTplRegister(function(res) {
       // console.log(res);

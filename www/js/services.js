@@ -1,7 +1,7 @@
 angular.module('app.services', [])
 
 /* Dropbox */
-.factory('Dropbox', function($http, $rootScope) {
+.factory('Dropbox', function($http, $rootScope,$timeout,$cordovaFileTransfer) {
     var service = {};
 
     service.getAccountInfo = function(cb) {
@@ -79,6 +79,26 @@ angular.module('app.services', [])
                 if(cb) cb();
             });
         });
+    };
+
+    service.downloadFile = function(imgurl, cb){
+      var targetPath = cordova.file.documentsDirectory + "downloadedImage.png";
+      var trustHosts = true
+      var options = {};
+      console.log("hit downloadDropboxFile: "+imgurl);
+      $cordovaFileTransfer.download(imgurl, targetPath, options, trustHosts)
+      .then(function(result) {
+        // Success!
+        cb(null,result);
+      }, function(err) {
+        console.log('img download FAIL. err: \n'+JSON.stringify(err));
+        cb(err);
+      }, function (progress) {
+        $timeout(function () {
+          //$scope.downloadProgress = (progress.loaded / progress.total) * 100;
+          // console.log("download progress: "+ $scope.downloadProgress);
+        });
+      });
     };
 
     service.appendUser = function(name, email, cb) {

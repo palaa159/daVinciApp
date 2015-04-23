@@ -153,7 +153,6 @@ angular.module('app.controllers', [])
         // Load images
         Dropbox.getImages(function() {
           $rootScope.gallery = $rootScope.gallery.chunk(6);
-          console.log($rootScope.gallery);
           $ionicViewSwitcher.nextDirection('forward');
           $state.go('/03-gallery');
         });
@@ -171,6 +170,7 @@ angular.module('app.controllers', [])
   $cordovaOauth,
   $cordovaPrinter,
   $cordovaSocialSharing,
+  $cordovaFileTransfer,
   Mandrill,
   ngDialog,
   Dialogs,
@@ -183,6 +183,8 @@ angular.module('app.controllers', [])
     console.log('open image modal');
     IMG_TO_SHARE = imgurl;
     $scope.imgToShare = IMG_TO_SHARE;
+    
+
 
     ngDialog.open({
       template: 'views/imageModal.html',
@@ -206,10 +208,11 @@ angular.module('app.controllers', [])
                 "user_id": "2795506425", "screen_name": "momentus_io" } */
             $rootScope.socialToShare = 'Twitter';
             $rootScope.twitter_token = result.oauth_token;
+            $rootScope.twitter_secret_token = result.oauth_token_secret;
             $scope.closeThisDialog();
             $rootScope.goToPage('/04-share');
           }, function(error) {
-            console.log('twitter login error: ' + JSON.stringify(error, null, '\t'));
+            console.log('twitter login error: ' + JSON.stringify(error));
             $rootScope.isErrorSignIn = true;
             Dialogs.alert('Unable to complete the sign-in process. Please try again.', 'Got it');
           });
@@ -300,7 +303,9 @@ angular.module('app.controllers', [])
   $ionicViewSwitcher,
   $http,
   $cordovaSocialSharing,
+  $cordovaFile,
   Dialogs,
+  Dropbox,
   $ionicLoading,
   $state) {
   console.log('```` Rendering Share');
@@ -319,7 +324,71 @@ angular.module('app.controllers', [])
       maxWidth: 200,
       showDelay: 0
     });
+
+    // var msgWebSafe = escape(msgtoshare)
+    //       .replace(/\@/g, '%40')
+    //       .replace(/\*/g, '%2A')
+    //       .replace(/\//g, '%2F')
+    //       .replace(/\+/g, '%2B');
     
+    Dropbox.downloadFile(IMG_TO_SHARE, function(e, result){
+      if(e) return console.log("error downloading file.");
+      console.log("img download SUCCESS. result: \n"+JSON.stringify(result,null,'\t'));
+      $scope.localFile = result.nativeUrl;
+
+      $cordovaFile.readAsDataURL(cordova.file.documentsDirectory, 'downloadedImage.png')
+        .then(function (success) {
+          console.log("Finished Encoding Base64");
+          console.log(success);
+          // console.log("readAsDataURL SUCCESS: "+JSON.stringify(success, null, '\t'));
+          console.log( TWITTER_API_KEY, TWITTER_SECRET_KEY );
+          console.log(($rootScope.twitter_token).toString(), ($rootScope.twitter_secret_token).toString());
+          $rootScope.codeBird.setToken(($rootScope.twitter_token).toString(), ($rootScope.twitter_secret_token).toString());
+          var base_64 = success.substr( success.indexOf(",")+1, success.length );
+          console.log("------------ base_64 -------------");
+          console.log(base_64);
+          var params = {media: base_64};
+          // var params = {media: 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB+0lEQVR42mP8//8/Ay0BEwONwagFoxZQDljI0PP8x7/Z93/e+PxXmpMpXp5dh4+ZgYHh0bd/clxYnMuINaMtfvRLgp3RVZwVU+rkuz+eRz+//wXVxcrEkKnEceXTX0dRlhoNTmKDaOvzXwHHv6x9+gtN/M9/hpjTX+GmMzAw/P7HMOnOj+ff//35x/Ds+z9iLfjPwPDt7//QE1/Sz319/RNh3PkPf+58+Yup/t7Xf9p8zFKcTMRa4CLGCrFm1v2fSjs+pJ/7uuvl7w+//yO7HRkUq3GEyrCREMk+kqy2IiyH3/xhYGD48uf/rPs/Z93/yczIwM3CiFU9Hw5xnD4ouvTt4Tf0AP37n+HTb+w+UOBmIs2CICm2R9/+EZlqGRkYzIVYSLMgRIYtUYGdSAsMBFgUuJhIy2iMDAwt2pysjAwLHv78RcgnOcrs5BQVHEyMG579Imi6Nh9zrBxZFgixMW624pXnwldYcTAzLjDhZmUit7AzE2K54c7fp8eF1QhWRobFptwmgiwkF3b//jMwMjJ8+P3/zPs/yx/9Wvr412+MgBJlZ1xsyuOOrbAibMHH3/87b32fce/nR2ypnpuFMVGevU6TQ5SdqKKeEVez5cuf/7te/j727s+9L/++/v3PzcyowM1kIcTiLs7Kz8pIfNnOONouGrVg1AIGAJ6gvN4J6V9GAAAAAElFTkSuQmCC'};
+          // $rootScope.codeBird.__call(
+          //   'statuses_update',
+          //   {
+          //     // 'media_ids': reply.media_id_string,
+          //     'status': msgtoshare
+          //   },
+          //   function (_reply) {
+          //   // ...
+          //     console.log(JSON.stringify(_reply,null,'\t'));
+          //     // if success, go to thankyou page
+          //     // delete local file
+          //     $rootScope.goToPage('/05-thankyou');
+          //   });
+          $rootScope.codeBird.__call(
+            "media_upload",
+            params,
+            function (reply, rate_limit) {
+              console.log("twitter reply: "+JSON.stringify(reply, null, '\t'));
+              console.log('Rate limit: ' + JSON.stringify(rate_limit, null, '\t'));
+                  // you get a media id back:
+                  $rootScope.codeBird.__call(
+                    'statuses_update',
+                    {
+                      'media_ids': reply.media_id_string,
+                      'status': msgtoshare
+                    },
+                    function (_reply) {
+                    // ...
+                      console.log(JSON.stringify(_reply,null,'\t'));
+                      // if success, go to thankyou page
+                      // delete local file
+                      $rootScope.goToPage('/05-thankyou');
+                    }
+                  );
+              });
+        }, function (error) {
+          console.log("readAsDataURL ERROR: "+JSON.stringify(error));
+      });
+    });
+
     /*** I BELIEVE THIS IS OUR ONLY SOLUTION: ***/
     // https://dev.twitter.com/rest/reference/post/media/upload
     // https://dev.twitter.com/rest/public/uploading-media
@@ -405,3 +474,5 @@ angular.module('app.controllers', [])
   }, 10000);
 
 });
+
+
