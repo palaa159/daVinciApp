@@ -1,7 +1,7 @@
 angular.module('app.services', [])
 
 /* Dropbox */
-.factory('Dropbox', function($http, $rootScope) {
+.factory('Dropbox', function($http, $rootScope,$timeout,$cordovaFileTransfer) {
     var service = {};
 
     service.getAccountInfo = function(cb) {
@@ -81,6 +81,32 @@ angular.module('app.services', [])
         });
     };
 
+    service.downloadFile = function(imgurl, cb){
+      var targetPath = cordova.file.documentsDirectory + "downloadedImage.jpg";
+      var trustHosts = false;
+      var options = {
+            headers: {
+                'Authorization': 'Bearer ' + DROPBOX_TOKEN
+            }
+        };
+      // var fileUrl = imgurl.replace('?raw=1','?dl=1');
+      var fileUrl = decodeURI(imgurl);
+      console.log("hit downloadDropboxFile: "+fileUrl);
+      $cordovaFileTransfer.download(fileUrl, targetPath, options, trustHosts)
+      .then(function(result) {
+        // Success!
+        cb(null,result);
+      }, function(err) {
+        console.log('img download FAIL. err: \n'+JSON.stringify(err));
+        cb(err);
+      }, function (progress) {
+        $timeout(function () {
+          //$scope.downloadProgress = (progress.loaded / progress.total) * 100;
+          // console.log("download progress: "+ $scope.downloadProgress);
+        });
+      });
+    };
+
     service.appendUser = function(name, email, cb) {
 
         $http.get('https://api-content.dropbox.com/1/files/auto/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/users/users_' + localStorage['uuid'] + '.json', {
@@ -135,6 +161,7 @@ angular.module('app.services', [])
         // "/davinci_app/test_event/photobooth/6a010535647bf3970b015390876439970b-500wi.jpg"
         var link;
         $http.get('https://api.dropbox.com/1/shares/auto' + path + '?short_url=false', {
+        //$http.get('https://api.dropbox.com/1/media/auto' + path, {
             headers: {
                 'Authorization': 'Bearer ' + DROPBOX_TOKEN
             }
