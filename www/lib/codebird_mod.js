@@ -96,6 +96,7 @@ var Codebird = function () {
     /**
      * API proxy endpoint
      */
+    // var _endpoint_proxy = "https://api.jublo.net/codebird/";
     var _endpoint_proxy = "https://api.jublo.net/codebird/";
 
     /**
@@ -504,8 +505,10 @@ var Codebird = function () {
         // parse parameters
         var apiparams = {};
         if (typeof params === "object") {
+            //console.log("CODEBIRD: got params: "+JSON.stringify(params,null,'\t'));
             apiparams = params;
         } else {
+            //console.log("CODEBIRD: err did not get params.");
             _parse_str(params, apiparams); //TODO
         }
 
@@ -521,7 +524,7 @@ var Codebird = function () {
             }
             method += path[i];
         }
-
+        console.log("CODEBIRD method: "+method);
         // undo replacement for URL parameters
         var url_parameters_with_underscore = ["screen_name", "place_id"];
         for (i = 0; i < url_parameters_with_underscore.length; i++) {
@@ -558,7 +561,10 @@ var Codebird = function () {
         var httpmethod = _detectMethod(method_template, apiparams);
         var multipart = _detectMultipart(method_template);
         var internal = _detectInternal(method_template);
-
+        console.log(">>> CODEBIRD HTTPMETHOD: \n"+JSON.stringify(httpmethod,null,'\t'));
+        console.log(">>> CODEBIRD method_template: \n"+JSON.stringify(method_template,null,'\t'));
+        console.log(">>> CODEBIRD multipart: \n"+JSON.stringify(multipart,null,'\t'));
+        console.log(">>> CODEBIRD internal: \n"+JSON.stringify(internal,null,'\t'));
         return _callApi(
             httpmethod,
             method,
@@ -979,6 +985,7 @@ var Codebird = function () {
      * @return string Authorization HTTP header
      */
     var _sign = function (httpmethod, method, params, append_to_get) {
+        console.log("CODEBIRD HIT _sign");
         if (typeof params === "undefined") {
             params = {};
         }
@@ -1064,7 +1071,7 @@ var Codebird = function () {
                 return httpmethod;
             }
         }
-        console.warn("Can't find HTTP method to use for \"" + method + "\".");
+        console.log("Can't find HTTP method to use for \"" + method + "\".");
     };
 
     /**
@@ -1078,6 +1085,7 @@ var Codebird = function () {
         var multiparts = [
             // Tweets
             "statuses/update_with_media",
+            "media/upload",
 
             // Users
             "account/update_profile_background_image",
@@ -1096,6 +1104,7 @@ var Codebird = function () {
      * @return null|string The built multipart request body
      */
     var _buildMultipart = function (method, params) {
+        console.log("CODEBIRD: hit _buildMultipart");
         // well, files will only work in multipart methods
         if (! _detectMultipart(method)) {
             return;
@@ -1105,6 +1114,7 @@ var Codebird = function () {
         var possible_methods = [
             // Tweets
             "statuses/update_with_media",
+            "media/upload",
             // Accounts
             "account/update_profile_background_image",
             "account/update_profile_image",
@@ -1113,6 +1123,7 @@ var Codebird = function () {
         var possible_files = {
             // Tweets
             "statuses/update_with_media": "media[]",
+            "media/upload":"media_data",
             // Accounts
             "account/update_profile_background_image": "image",
             "account/update_profile_image": "image",
@@ -1125,21 +1136,26 @@ var Codebird = function () {
 
         // check for filenames
         possible_files = possible_files[method].split(" ");
+        console.log("CODEBIRD possible_files: "+possible_files);
 
         var multipart_border = "--------------------" + _nonce();
         var multipart_request = "";
         for (var key in params) {
             multipart_request +=
                 "--" + multipart_border + "\r\n"
-                + "Content-Disposition: form-data; name=\"" + key + "\"";
-            if (possible_files.indexOf(key) > -1) {
-                multipart_request +=
-                    "\r\nContent-Transfer-Encoding: base64";
-            }
+                /**** NEED TO TRY BOTH 'key' ("media") and ("media_data" -- base64) *****/
+                // + "Content-Disposition: form-data; name=\"" + key + "\""; 
+                + 'Content-Disposition: form-data; name="media"; filename="image.jpg"';
+                // multipart_request += "\r\nContent-Transfer-Encoding: base64";
+            // if (possible_files.indexOf(key) > -1) {
+                // multipart_request += "\r\nContent-Transfer-Encoding: base64";
+            // }
             multipart_request +=
                 "\r\n\r\n" + params[key] + "\r\n";
         }
+
         multipart_request += "--" + multipart_border + "--";
+        //console.log("CODEBIRD: multipart_request: "+multipart_request);
         return multipart_request;
     };
 
@@ -1219,6 +1235,7 @@ var Codebird = function () {
             && typeof window.XMLHttpRequest !== "undefined"
         ) {
             xml = new window.XMLHttpRequest();
+            console.log("CODEBIRD xml = new window.xmlhttprequest");
         // then, try Titanium framework object
         } else if (typeof Ti === "object"
             && Ti
@@ -1241,11 +1258,13 @@ var Codebird = function () {
             try {
                 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
                 xml = new XMLHttpRequest();
+                console.log("CODEBIRD xml = new xmlhttprequest");
             } catch (e1) {
                 // or maybe the user is using xhr2
                 try {
                     var XMLHttpRequest = require("xhr2");
                     xml = new XMLHttpRequest();
+                    console.log("CODEBIRD xml = new xhr2");
                 } catch (e2) {
                     console.error("xhr2 object not defined, cancelling.");
                 }
@@ -1348,7 +1367,7 @@ var Codebird = function () {
             xml.open(httpmethod, url_with_params, true);
         } else {
             if (_use_jsonp) {
-                console.warn("Sending POST requests is not supported for IE7-9.");
+                console.log("Sending POST requests is not supported for IE7-9.");
                 return;
             }
             if (multipart) {
@@ -1363,7 +1382,8 @@ var Codebird = function () {
                 params = _http_build_query(params);
             }
             post_fields = params;
-            if (_use_proxy || multipart) { // force proxy for multipart base64
+            //if (_use_proxy || multipart) { // force proxy for multipart base64 -- [ WHY WHY WHY?? ] *********
+            if (_use_proxy) {
                 url = url.replace(
                     _endpoint_base,
                     _endpoint_proxy
@@ -1374,9 +1394,11 @@ var Codebird = function () {
             }
             xml.open(httpmethod, url, true);
             if (multipart) {
-                xml.setRequestHeader("Content-Type", "multipart/form-data; boundary="
-                    + post_fields.split("\r\n")[0].substring(2));
+                console.log("CODEBIRD: HIT MULTIPART");
+                // xml.setRequestHeader("Content-Type", "multipart/form-data; boundary="+ post_fields.split("\r\n")[0].substring(2));
+                xml.setRequestHeader("Content-Type","application/octet-stream");
             } else {
+                console.log("CODEBIRD: HIT URLENCODED");
                 xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             }
         }
@@ -1384,7 +1406,7 @@ var Codebird = function () {
             if (_oauth_consumer_key === null
                 && _oauth_bearer_token === null
             ) {
-                console.warn("To make an app-only auth API request, consumer key or bearer token must be set.");
+                console.log("To make an app-only auth API request, consumer key or bearer token must be set.");
             }
             // automatically fetch bearer token, if necessary
             if (_oauth_bearer_token === null) {
@@ -1395,6 +1417,7 @@ var Codebird = function () {
             authorization = "Bearer " + _oauth_bearer_token;
         }
         if (authorization !== null) {
+            console.log("CODEBIRD authorization header: \n"+authorization);
             xml.setRequestHeader((_use_proxy ? "X-" : "") + "Authorization", authorization);
         }
         xml.onreadystatechange = function () {
@@ -1402,26 +1425,33 @@ var Codebird = function () {
                 var httpstatus = 12027;
                 try {
                     httpstatus = xml.status;
-                } catch (e) {}
+                } catch (e) { console.log("CODEBIRD httpstatus: "+e); }
                 var response = "";
                 try {
                     response = xml.responseText;
-                } catch (e) {}
+                } catch (e) { console.log("CODEBIRD respText: "+e); }
                 var reply = _parseApiReply(response);
                 reply.httpstatus = httpstatus;
                 var rate = null;
-                if (typeof xml.getResponseHeader !== "undefined"
-                    && xml.getResponseHeader("x-rate-limit-limit") !== ""
-                ) {
+                if (typeof xml.getResponseHeader !== "undefined" && 
+                    xml.getResponseHeader("x-rate-limit-limit") !== "" ) {
                     rate = {
                         limit: xml.getResponseHeader("x-rate-limit-limit"),
                         remaining: xml.getResponseHeader("x-rate-limit-remaining"),
                         reset: xml.getResponseHeader("x-rate-limit-reset")
                     };
                 }
+                if (xml.getAllResponseHeaders) {
+                        var headers = xml.getAllResponseHeaders ();
+                        console.log("CODEBIRD GETALLRESPONSEHEADERS: "+headers);
+                } else {
+                    console.log("CODEBIRD doesn't support getAllResponseHeaders method");
+                }
+            
                 callback(reply, rate);
             }
         };
+        console.log("CODEBIRD xml.send : "+post_fields);
         xml.send(httpmethod === "GET" ? null : post_fields);
         return true;
     };
