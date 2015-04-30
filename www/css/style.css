@@ -6,8 +6,9 @@
 }
 body {
     /*transition: 0.75s;*/
-    background-size: cover 110% !important;
+    background-size: cover!important;
     background-repeat: no-repeat !important;
+    background-attachment: fixed;
 }
 /*View Transparent*/
 
