@@ -14,7 +14,7 @@ Event-based photo sharing application, built with [ionic](http://ionicframework.
     "PACKAGE_NAME": "com.ionicframework.myappname"
 	}
   ```
-2. `$ ionic platform add ios | android
+2. `$ ionic platform add ios | android`
 
 ##Supported APIs
 * Dropbox auth, get and post files
@@ -24,4 +24,4 @@ Event-based photo sharing application, built with [ionic](http://ionicframework.
 * AirPrint
 
 ##Credits
-Joe Saavedra + Apon Palanuwech for Volvox Labs.
+[Joe Saavedra](http://momentus.io) + [Apon Palanuwech](http://apon.io) for [Volvox Labs](http://volvoxlabs.com).
