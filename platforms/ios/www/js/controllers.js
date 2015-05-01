@@ -53,7 +53,6 @@ angular.module('app.controllers', [])
 
       EVENT_NAME = res.event_name;
       WELCOME_BG = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_bg.jpg';
-      
 
       $rootScope.msgToShare = res.share_comment;
 
@@ -61,7 +60,6 @@ angular.module('app.controllers', [])
         $rootScope.backgroundBg = d;
         console.log($rootScope.backgroundBg); // √
         $state.go('/01-welcome');
-        // $state.go('/03-gallery');
         if (window.cordova) {
           $timeout(function() {
             $cordovaSplashscreen.hide();

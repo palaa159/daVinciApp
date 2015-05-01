@@ -91,6 +91,7 @@ angular.module(APP_NAME, [
     $rootScope.startOver = function() {
       // Restart
       console.log('go to welcome');
+      $rootScope.backgroundBg = $rootScope.welcomeBg;
       $state.go('/01-welcome');
       $timeout(function() {
         $rootScope.shouldHide = true;
@@ -143,7 +144,8 @@ angular.module(APP_NAME, [
       });
 
       Dropbox.returnDirectLink(WELCOME_BG, function(d) {
-        $rootScope.backgroundBg = d;
+        $rootScope.welcomeBg = d;
+        $rootScope.backgroundBg = $rootScope.welcomeBg;
         console.log($rootScope.backgroundBg); // √
         $state.go('/01-welcome');
         // $state.go('/03-gallery');
@@ -187,8 +189,8 @@ angular.module(APP_NAME, [
   // Go to page x
   $rootScope.goToPage = function(page) {
 
-    if(page === '/02-register'){ //set the BG for the rest of the app.
-      //set the bg to app_bg.png
+    if(page === '/02-register'){ 
+      //set the BG for the rest of the app.
       console.log("setting backgroundBg to rootScope.appBg");
       $rootScope.backgroundBg = $rootScope.appBg;
     }
