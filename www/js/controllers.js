@@ -52,22 +52,19 @@ angular.module('app.controllers', [])
       console.log(res);
 
       EVENT_NAME = res.event_name;
-      EVENT_BG = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_bg.jpg';
+      WELCOME_BG = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_bg.jpg';
 
       $rootScope.msgToShare = res.share_comment;
 
-      Dropbox.returnDirectLink(EVENT_BG, function(d) {
+      Dropbox.returnDirectLink(WELCOME_BG, function(d) {
         $rootScope.backgroundBg = d;
         console.log($rootScope.backgroundBg); // √
         $state.go('/01-welcome');
-        // $state.go('/03-gallery');
         if (window.cordova) {
           $timeout(function() {
             $cordovaSplashscreen.hide();
           }, 1000);
-
         }
-
       });
     }, function(err) {
       console.log(err);
