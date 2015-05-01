@@ -137,18 +137,21 @@ angular.module(APP_NAME, [
 
       Dropbox.returnDirectLink(EVENT_BG, function(d) {
         Dropbox.downloadFile(d, 'app_bg.jpg', function(e, result) {
+          console.log("downloaded image: "+result.nativeURL);
           $rootScope.appBg = result.nativeURL;
         });
       });
 
       Dropbox.returnDirectLink(EVENT_LOGO, function(d) {
         Dropbox.downloadFile(d, 'event_logo.jpg', function(e, result) {
+          console.log("downloaded image: "+result.nativeURL);
           $rootScope.event_logo = result.nativeURL;
         });
       });
 
       Dropbox.returnDirectLink(WELCOME_BG, function(d) {
         Dropbox.downloadFile(d, 'welcome_bg.jpg', function(e, result) {
+          console.log("downloaded image: "+result.nativeURL);
           $rootScope.welcomeBg = result.nativeURL;
           $rootScope.backgroundBg = $rootScope.welcomeBg;
           console.log('set backgroundBg to: '+$rootScope.backgroundBg); // √
