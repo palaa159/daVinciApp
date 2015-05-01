@@ -29,6 +29,7 @@ var EVENT_FOLDER       = localStorage['event_folder'] || 'default_event';
 var EVENT_NAME;
 var EVENT_LOGO;
 var EVENT_BG;
+var WELCOME_BG;
 var EVENT_DISCLAIMER;
 
 // Email thing
@@ -90,6 +91,7 @@ angular.module(APP_NAME, [
     $rootScope.startOver = function() {
       // Restart
       console.log('go to welcome');
+      $rootScope.backgroundBg = $rootScope.welcomeBg;
       $state.go('/01-welcome');
       $timeout(function() {
         $rootScope.shouldHide = true;
@@ -122,7 +124,8 @@ angular.module(APP_NAME, [
 
       EVENT_NAME = res.event_name;
       EVENT_LOGO = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_logo.png';
-      EVENT_BG = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_bg.jpg';
+      WELCOME_BG = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/welcome_bg.jpg';
+      EVENT_BG = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/app_bg.jpg';
       IMG_OVERLAY = '/' + DROPBOX_FOLDER + '/' + getEventFolder() + '/src_img/overlay.png';
 
       $rootScope.msgToShare = res.share_comment;
@@ -132,12 +135,17 @@ angular.module(APP_NAME, [
         $rootScope.overlayImg = d;
       });
 
+      Dropbox.returnDirectLink(EVENT_BG, function(d) {
+        $rootScope.appBg = d;
+      });
+
       Dropbox.returnDirectLink(EVENT_LOGO, function(d) {
         $rootScope.event_logo = d;
       });
 
-      Dropbox.returnDirectLink(EVENT_BG, function(d) {
-        $rootScope.backgroundBg = d;
+      Dropbox.returnDirectLink(WELCOME_BG, function(d) {
+        $rootScope.welcomeBg = d;
+        $rootScope.backgroundBg = $rootScope.welcomeBg;
         console.log($rootScope.backgroundBg); // √
         $state.go('/01-welcome');
         // $state.go('/03-gallery');
@@ -180,7 +188,13 @@ angular.module(APP_NAME, [
   });
   // Go to page x
   $rootScope.goToPage = function(page) {
-    //
+
+    if(page === '/02-register'){ 
+      //set the BG for the rest of the app.
+      console.log("setting backgroundBg to rootScope.appBg");
+      $rootScope.backgroundBg = $rootScope.appBg;
+    }
+
     var now = new Date().getTime();
     if (now - PREV_NOW > 600 * 1000 && !$rootScope.isWelcomePage) {
       // reset

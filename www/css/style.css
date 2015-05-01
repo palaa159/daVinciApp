@@ -6,8 +6,12 @@
 }
 body {
     /*transition: 0.75s;*/
-    background-size: cover 110% !important;
+    background-size: cover!important;
     background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-color: #000000 !important;
+/*    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;*/
 }
 /*View Transparent*/
 

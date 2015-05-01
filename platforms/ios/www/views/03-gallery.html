@@ -1,4 +1,6 @@
 <ion-view style="margin-top: 10px;">
+<!-- Refresh Button -->
+    <button class="button light" style="position: absolute; right: 10px; top: 10px; z-index: 9999; background: rgba(255,255,255,0.25); border: none; margin: 10px; min-height: 40px;" ng-click="refreshGallery()">Refresh Gallery</button>
     <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true">
         <ion-slide ng-repeat="sixImages in gallery" class="slide-by-six">
             <div class="slide-box">
