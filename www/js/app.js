@@ -136,26 +136,30 @@ angular.module(APP_NAME, [
       });
 
       Dropbox.returnDirectLink(EVENT_BG, function(d) {
-        $rootScope.appBg = d;
+        Dropbox.downloadFile(d, 'app_bg.jpg', function(e, result) {
+          $rootScope.appBg = result.nativeURL;
+        });
       });
 
       Dropbox.returnDirectLink(EVENT_LOGO, function(d) {
-        $rootScope.event_logo = d;
+        Dropbox.downloadFile(d, 'event_logo.jpg', function(e, result) {
+          $rootScope.event_logo = result.nativeURL;
+        });
       });
 
       Dropbox.returnDirectLink(WELCOME_BG, function(d) {
-        $rootScope.welcomeBg = d;
-        $rootScope.backgroundBg = $rootScope.welcomeBg;
-        console.log($rootScope.backgroundBg); // √
-        $state.go('/01-welcome');
-        // $state.go('/03-gallery');
-        if (window.cordova) {
-          $timeout(function() {
-            $cordovaSplashscreen.hide();
-          }, 1000);
-
-        }
-
+        Dropbox.downloadFile(d, 'welcome_bg.jpg', function(e, result) {
+          $rootScope.welcomeBg = result.nativeURL;
+          $rootScope.backgroundBg = $rootScope.welcomeBg;
+          console.log('set backgroundBg to: '+$rootScope.backgroundBg); // √
+          $state.go('/01-welcome');
+          // $state.go('/03-gallery');
+          if (window.cordova) {
+            $timeout(function() {
+              $cordovaSplashscreen.hide();
+            }, 1000);
+          }
+        });
       });
     }, function(err) {
       console.log(err);
@@ -191,8 +195,8 @@ angular.module(APP_NAME, [
 
     if(page === '/02-register'){ 
       //set the BG for the rest of the app.
-      console.log("setting backgroundBg to rootScope.appBg");
       $rootScope.backgroundBg = $rootScope.appBg;
+      console.log('set backgroundBg to: '+$rootScope.backgroundBg); // √
     }
 
     var now = new Date().getTime();

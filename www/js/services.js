@@ -81,8 +81,9 @@ angular.module('app.services', [])
         });
     };
 
-    service.downloadFile = function(imgurl, cb){
-      var targetPath = cordova.file.documentsDirectory + "downloadedImage.jpg";
+    service.downloadFile = function(imgurl, localName, cb){
+      // var targetPath = cordova.file.documentsDirectory + "downloadedImage.jpg";
+      var targetPath = cordova.file.documentsDirectory + localName;
       var trustHosts = false;
       var options = {
             headers: {

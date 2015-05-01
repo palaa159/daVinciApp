@@ -8,7 +8,9 @@ body {
     /*transition: 0.75s;*/
     background-size: cover!important;
     background-repeat: no-repeat !important;
-    background-attachment: fixed;
+    background-attachment: fixed !important;
+/*    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;*/
 }
 /*View Transparent*/
 
