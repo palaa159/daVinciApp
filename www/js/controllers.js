@@ -359,7 +359,7 @@ angular.module('app.controllers', [])
       $scope.localFile = result.nativeUrl;
 
       /** READ FILE AS BASE64 STRING **/
-      $cordovaFile.readAsDataURL(cordova.file.documentsDirectory, 'downloadedImage.jpg') //$cordovaFile.readAsBinaryString(cordova.file.documentsDirectory, 'downloadedImage.jpg')
+      $cordovaFile.readAsDataURL(cordova.file.documentsDirectory, 'share_img.jpg') //$cordovaFile.readAsBinaryString(cordova.file.documentsDirectory, 'downloadedImage.jpg')
       .then(function(success) {
         console.log(">> Finished Encoding File as base_64"); // console.log("readAsDataURL SUCCESS: "+JSON.stringify(success, null, '\t'));
         $rootScope.codeBird.setToken(($rootScope.twitter_token).toString(), ($rootScope.twitter_secret_token).toString());
