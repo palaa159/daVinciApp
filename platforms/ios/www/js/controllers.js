@@ -56,16 +56,16 @@ angular.module('app.controllers', [])
 
       $rootScope.msgToShare = res.share_comment;
 
-      Dropbox.returnDirectLink(WELCOME_BG, function(d) {
-        $rootScope.backgroundBg = d;
-        console.log($rootScope.backgroundBg); // √
-        $state.go('/01-welcome');
-        if (window.cordova) {
-          $timeout(function() {
-            $cordovaSplashscreen.hide();
-          }, 1000);
-        }
-      });
+      // Dropbox.returnDirectLink(WELCOME_BG, function(d) {
+      $rootScope.backgroundBg = $rootScope.welcomeBg;;
+      console.log($rootScope.backgroundBg); // √
+      $state.go('/01-welcome');
+      if (window.cordova) {
+        $timeout(function() {
+          $cordovaSplashscreen.hide();
+        }, 1000);
+      }
+      // });
     }, function(err) {
       console.log(err);
       if (err == null) {
@@ -353,13 +353,13 @@ angular.module('app.controllers', [])
     });
 
     /** DOWNLOAD FILE FROM DROPBOX **/
-    Dropbox.downloadFile(IMG_TO_SHARE, function(e, result) {
+    Dropbox.downloadFile(IMG_TO_SHARE, 'share_img.jpg', function(e, result) {
       if (e) return console.log("error downloading file.");
       console.log("img download SUCCESS. result: \n" + JSON.stringify(result, null, '\t'));
       $scope.localFile = result.nativeUrl;
 
       /** READ FILE AS BASE64 STRING **/
-      $cordovaFile.readAsDataURL(cordova.file.documentsDirectory, 'downloadedImage.jpg') //$cordovaFile.readAsBinaryString(cordova.file.documentsDirectory, 'downloadedImage.jpg')
+      $cordovaFile.readAsDataURL(cordova.file.documentsDirectory, 'share_img.jpg') //$cordovaFile.readAsBinaryString(cordova.file.documentsDirectory, 'downloadedImage.jpg')
       .then(function(success) {
         console.log(">> Finished Encoding File as base_64"); // console.log("readAsDataURL SUCCESS: "+JSON.stringify(success, null, '\t'));
         $rootScope.codeBird.setToken(($rootScope.twitter_token).toString(), ($rootScope.twitter_secret_token).toString());
