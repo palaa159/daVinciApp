@@ -77,7 +77,8 @@ angular.module('app.services', [])
                 var orderedGallery = _(reversedGallery).reverse().value();
                 var slicedOrdered = [];
                 //i have no idea why _.slice(orderedGallery, 0, 24); DOES NOT WORK?!?! unrecognized function?!
-                for (var i=0; i<MAX_NUM_IMGS_GALLERY; i++)
+                var numImgsInGallery = ( orderedGallery.length > MAX_NUM_IMGS_GALLERY ) ? MAX_NUM_IMGS_GALLERY : orderedGallery.length;
+                for (var i=0; i<numImgsInGallery; i++)
                     slicedOrdered.push(orderedGallery[i]);
                 
                 $rootScope.gallery = slicedOrdered;

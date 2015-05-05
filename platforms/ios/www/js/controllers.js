@@ -57,7 +57,7 @@ angular.module('app.controllers', [])
       $rootScope.msgToShare = res.share_comment;
 
       // Dropbox.returnDirectLink(WELCOME_BG, function(d) {
-      $rootScope.backgroundBg = $rootScope.welcomeBg;;
+      $rootScope.backgroundBg = $rootScope.welcomeBg;
       console.log($rootScope.backgroundBg); // √
       $state.go('/01-welcome');
       if (window.cordova) {
@@ -68,7 +68,7 @@ angular.module('app.controllers', [])
       // });
     }, function(err) {
       console.log(err);
-      if (err == null) {
+      if (err === null) {
         err = {};
         err.error = 'No internet connection.';
       }

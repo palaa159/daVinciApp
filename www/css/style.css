@@ -200,7 +200,7 @@ body {
 }
 
 .ngdialog.ngdialog-theme-default .ngdialog-content {
-    background: rgba(0,0,0,0.7) !important;
+    background: rgba(0,0,0,0.0) !important;
 }
 
 .share-icon {
