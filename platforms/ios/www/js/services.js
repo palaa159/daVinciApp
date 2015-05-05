@@ -73,9 +73,14 @@ angular.module('app.services', [])
                     console.log(err);
                     cb(err);
                 }
-                //console.log("UNORDEREDGALLERY: \n"+JSON.stringify(unorderedGallery, null, '\t'));
                 var reversedGallery = _.pluck(_.sortBy(unorderedGallery, 'path'), 'link');
-                $rootScope.gallery = _(reversedGallery).reverse().value();
+                var orderedGallery = _(reversedGallery).reverse().value();
+                var slicedOrdered = [];
+                //i have no idea why _.slice(orderedGallery, 0, 24); DOES NOT WORK?!?! unrecognized function?!
+                for (var i=0; i<MAX_NUM_IMGS_GALLERY; i++)
+                    slicedOrdered.push(orderedGallery[i]);
+                
+                $rootScope.gallery = slicedOrdered;
                 console.log("$rootScope.gallery: \n"+JSON.stringify($rootScope.gallery, null, '\t'));
                 if(cb) cb();
             });

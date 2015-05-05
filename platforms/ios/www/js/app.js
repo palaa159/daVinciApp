@@ -39,6 +39,7 @@ var EMAIL_PHOTO_COMPILED;
 
 var IMG_OVERLAY;
 var IMG_TO_SHARE;
+var MAX_NUM_IMGS_GALLERY = 30;
 
 var PREV_NOW = new Date().getTime();
 
