@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>3EE1C8EB-0F41-42FF-BAF1-628D1E96939F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>DaVinci</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>26F0F1D128FCC40C77D50E67A8E0231977873E0C</key>
 		<string>https://github.com/palaa159/daVinciApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>platforms/ios/DaVinci.xcodeproj/project.xcworkspace</string>
+	<string>platforms/ios/DaVinci.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>26F0F1D128FCC40C77D50E67A8E0231977873E0C</key>

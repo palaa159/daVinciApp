@@ -74,7 +74,8 @@ angular.module('app.services', [])
                     cb(err);
                 }
                 //console.log("UNORDEREDGALLERY: \n"+JSON.stringify(unorderedGallery, null, '\t'));
-                $rootScope.gallery = _.pluck(_.sortBy(unorderedGallery, 'path'), 'link');
+                var reversedGallery = _.pluck(_.sortBy(unorderedGallery, 'path'), 'link');
+                $rootScope.gallery = _(reversedGallery).reverse().value();
                 console.log("$rootScope.gallery: \n"+JSON.stringify($rootScope.gallery, null, '\t'));
                 if(cb) cb();
             });
